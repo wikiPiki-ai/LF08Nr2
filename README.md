@@ -1,6 +1,8 @@
 # LF08Nr2
 [LF08 Projekt VorkursDatenbank - ITA22.pdf](https://github.com/wikiPiki-ai/LF08Nr2/files/15293072/LF08.Projekt.VorkursDatenbank.-.ITA22.pdf)
 
+https://wpf-tutorial.com/
+
 Notes:
 
 Ziel .exe (Windows Desktop Applikation), auf Schulrechner lauffähig, Libs mit abgegeben (User halt nur exe drücken), VS Studio Projekt abgeben pdf Formular -> pdf Inhalt einlesen und speichern (zwei bis drei Personen) Abgabe App 24.06.24 Abgabe .pdf 17.06.24
