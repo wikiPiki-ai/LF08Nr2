@@ -5,8 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:LF08Nr2"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="Vorkurs Projekt Mika, Léon und Ken" Height="450" Width="800">
     <Grid>
-
+        <TextBlock>smth</TextBlock>
     </Grid>
 </Window>

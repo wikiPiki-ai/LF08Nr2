@@ -2,24 +2,27 @@
 using System.Data;
 using System.Windows;
 using System.Windows.Media;
+using System.Diagnostics;
 
 namespace LF08Nr2
 {
     /// <summary>
     /// Interaction logic for App.xaml
-    /// </summary>
+    /// </summary>  
     public partial class App : Application
     {
-        private void Application_Startup(object sender, StartupEventArgs e)
-        {
-            
+            void App_Startup(object sender, StartupEventArgs e)
+            {
+                Trace.WriteLine(System.Environment.CurrentDirectory + "\\DB");
 
-            MainWindow mainWindow = new MainWindow();
-            
-            mainWindow.WindowState = WindowState.Minimized;
-            
-            mainWindow.Show();
-        }
+
+                MainWindow mainWindow = new MainWindow();
+
+                mainWindow.WindowState = WindowState.Minimized;
+                //mainWindow.
+
+                mainWindow.Show();
+
+            }
     }
-
 }
