@@ -59,6 +59,10 @@ App
 	„Teilnahmeliste_Kursname.xyz“ entsprechen
 
 
+![Kurze erklärung](https://github.com/wikiPiki-ai/LF08Nr2/assets/151629605/ffcf3d8b-316e-4afe-b3ba-ce23724f5492)
+
+ 
+
 Gruppen:
 
 Altin Tolg Saszkia
