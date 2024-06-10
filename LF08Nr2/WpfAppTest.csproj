@@ -9,7 +9,19 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Page Remove="View\App.xaml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ApplicationDefinition Include="View\App.xaml" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="System.Data.SQLite" Version="1.0.118" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="ViewAndModel\" />
   </ItemGroup>
 
 </Project>
