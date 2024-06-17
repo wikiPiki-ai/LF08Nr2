@@ -77,3 +77,6 @@ Miatar erik manar
 ken léon mika
 
 lea dennis
+
+![WhatsApp Bild 2024-06-17 um 13 03 38_4b20b39c](https://github.com/wikiPiki-ai/LF08Nr2/assets/151629605/45529eb1-9a13-45ab-9f19-40f4cb86adf8)
+
