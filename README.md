@@ -61,6 +61,9 @@ App
 
 ![Kurze erklärung](https://github.com/wikiPiki-ai/LF08Nr2/assets/151629605/ffcf3d8b-316e-4afe-b3ba-ce23724f5492)
 
+
+![Desing aufbau](https://github.com/wikiPiki-ai/LF08Nr2/assets/151629605/3f51e65b-0647-4d3b-8ca0-fff026cb8c5b)
+
  
 
 Gruppen:
