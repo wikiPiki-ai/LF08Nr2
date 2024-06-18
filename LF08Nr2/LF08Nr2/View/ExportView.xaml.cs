@@ -23,5 +23,10 @@ namespace LF08Nr2.View
         {
             InitializeComponent();
         }
+        
+        private void CloseWindow(object sender, RoutedEventArgs e)
+        {
+            Close();
+        }
     }
 }

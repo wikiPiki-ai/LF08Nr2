@@ -17,10 +17,6 @@ namespace LF08Nr2
     /// </summary>
     public partial class MainWindow : Window
     {
-
-        ImportView importView = new ImportView();
-        ExportView exportView = new ExportView();
-
         public MainWindow()
         {
             InitializeComponent();
@@ -28,12 +24,14 @@ namespace LF08Nr2
 
         private void ImportButtonClick(object sender, RoutedEventArgs e)
         {
+            ImportView importView = new ImportView();
             //Sollte noch mehr Logik hinzukommen wird dies in Eine ViewModel Ausgelagert 
             importView.Show();
         }
 
         private void ExportButtonClick(object sender, RoutedEventArgs e)
         {
+            ExportView exportView = new ExportView();
             //Sollte noch mehr Logik hinzukommen wird dies in Eine ViewModel Ausgelagert 
             exportView.Show();
         }
