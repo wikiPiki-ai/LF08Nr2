@@ -28,11 +28,13 @@ namespace LF08Nr2
 
         private void ImportButtonClick(object sender, RoutedEventArgs e)
         {
+            //Sollte noch mehr Logik hinzukommen wird dies in Eine ViewModel Ausgelagert 
             importView.Show();
         }
 
         private void ExportButtonClick(object sender, RoutedEventArgs e)
         {
+            //Sollte noch mehr Logik hinzukommen wird dies in Eine ViewModel Ausgelagert 
             exportView.Show();
         }
     }
