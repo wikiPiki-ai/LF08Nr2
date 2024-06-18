@@ -20,5 +20,15 @@ namespace LF08Nr2
         {
             InitializeComponent();
         }
+
+        private void ImportButtonClick(object sender, RoutedEventArgs e)
+        {
+            string importButton = "ImportButton";
+        }
+
+        private void ExportButtonClick(object sender, RoutedEventArgs e)
+        {
+            string export = "export";
+        }
     }
 }

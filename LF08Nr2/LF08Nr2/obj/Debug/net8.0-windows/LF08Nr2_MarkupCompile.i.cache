@@ -10,11 +10,11 @@ none
 false
 TRACE;DEBUG;NET;NET8_0;NETCOREAPP
 C:\Development\Schule\GitHub\LF08Nr2\LF08Nr2\LF08Nr2\App.xaml
-11407045341
+3-779918468
 
-6-691619542
+12-1196626165
 198-1509178875
-MainWindow.xaml;
+MainWindow.xaml;View\ExportView.xaml;View\ImportView.xaml;
 
-True
+False
 
