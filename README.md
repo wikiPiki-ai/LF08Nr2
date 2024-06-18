@@ -78,5 +78,9 @@ ken léon mika
 
 lea dennis
 
+Datei Strucktur:
+![image](https://github.com/wikiPiki-ai/LF08Nr2/assets/151629605/292d1db8-2d96-41c0-94f5-9824d6ca3b73)
+
+
 ![WhatsApp Bild 2024-06-17 um 13 03 38_4b20b39c](https://github.com/wikiPiki-ai/LF08Nr2/assets/151629605/45529eb1-9a13-45ab-9f19-40f4cb86adf8)
 
