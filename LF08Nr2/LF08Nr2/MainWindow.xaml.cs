@@ -8,6 +8,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using LF08Nr2.View;
 
 namespace LF08Nr2
 {
@@ -16,6 +17,10 @@ namespace LF08Nr2
     /// </summary>
     public partial class MainWindow : Window
     {
+
+        ImportView importView = new ImportView();
+        ExportView exportView = new ExportView();
+
         public MainWindow()
         {
             InitializeComponent();
@@ -23,12 +28,12 @@ namespace LF08Nr2
 
         private void ImportButtonClick(object sender, RoutedEventArgs e)
         {
-            string importButton = "ImportButton";
+            importView.Show();
         }
 
         private void ExportButtonClick(object sender, RoutedEventArgs e)
         {
-            string export = "export";
+            exportView.Show();
         }
     }
 }
