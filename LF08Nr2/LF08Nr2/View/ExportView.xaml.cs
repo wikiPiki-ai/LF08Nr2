@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using LF08Nr2.ViewModel;
 
 namespace LF08Nr2.View
 {
@@ -19,11 +20,16 @@ namespace LF08Nr2.View
     /// </summary>
     public partial class ExportView : Window
     {
+        private readonly ExportViewModelcs exportViewModelcs;
+
         public ExportView()
         {
+            exportViewModelcs = new ExportViewModelcs();
+            DataContext = exportViewModelcs;
             InitializeComponent();
+
         }
-        
+
         private void CloseWindow(object sender, RoutedEventArgs e)
         {
             Close();

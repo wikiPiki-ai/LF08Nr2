@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using LF08Nr2.ViewModel.Base;
 
-namespace LF08Nr2.ViewModel
+namespace LF08Nr2.Model
 {
-    public class ExportViewModelcs : ViewModelBase
+    public class FileModel
     {
+        public string FileName { get; set; }
     }
 }

@@ -15,5 +15,7 @@ namespace LF08Nr2.Model
 
         public string Lastname { get; set; }
 
+        // public .....
+
     }
 }

@@ -21,29 +21,38 @@ namespace LF08Nr2.View
     /// </summary>
     public partial class ImportView : Window
     {
+         public List<FileModel> Files = new List<FileModel>();
+         public string Filesstring;
 
-        private readonly ImportViewModel importviewModel= new ImportViewModel();
+         private int counter = 1;
+
+         private readonly ImportViewModel importviewModel;
 
         public ImportView()
         {
+            importviewModel = new();
+            DataContext = importviewModel;
             InitializeComponent();
 
-            
+            Files.Add(new FileModel() { FileName = "firstName"});
 
-            List<ImportModel> import= new List<ImportModel>();
-            
-            import.Add( new ImportModel() {Id = 1, Name = "TestName",Lastname ="testLastname2"});
+
+            List<ImportModel> import = new List<ImportModel>();
+
+            import.Add(new ImportModel() { Id = 1, Name = "TestName", Lastname = "testLastname2" });
 
             DummyName.ItemsSource = import;
         }
 
-        private void ColoseWindow(object sender, RoutedEventArgs e)
+        private void CloseWindow(object sender, RoutedEventArgs e)
         {
             Close();
         }
 
         private void AddDater(object sender, RoutedEventArgs e)
         {
+
+            importviewModel.BindingExampel();
             //hier der aufruf zum code behind, wo logik verfasst wird.
             importviewModel.AddDataFromExplorer();
         }
