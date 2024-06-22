@@ -63,7 +63,6 @@ namespace LF08Nr2.Model
 
         public void createTable(String tableName, String sqlCommandUser)
         {
-            //TODO
             if (!checkIfExist(tableName))
             {
                 sqlCommand = "CREATE TABLE " + tableName + " (" + sqlCommandUser + ");";
