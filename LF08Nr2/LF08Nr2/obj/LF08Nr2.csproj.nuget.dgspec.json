@@ -1,25 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Development\\Schule\\GitHub\\LF08Nr2\\LF08Nr2\\LF08Nr2\\LF08Nr2.csproj": {}
+    "C:\\Users\\leon\\Source\\Repos\\wikiPiki-ai\\LF08Nr2\\LF08Nr2\\LF08Nr2\\LF08Nr2.csproj": {}
   },
   "projects": {
-    "C:\\Development\\Schule\\GitHub\\LF08Nr2\\LF08Nr2\\LF08Nr2\\LF08Nr2.csproj": {
+    "C:\\Users\\leon\\Source\\Repos\\wikiPiki-ai\\LF08Nr2\\LF08Nr2\\LF08Nr2\\LF08Nr2.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Development\\Schule\\GitHub\\LF08Nr2\\LF08Nr2\\LF08Nr2\\LF08Nr2.csproj",
+        "projectUniqueName": "C:\\Users\\leon\\Source\\Repos\\wikiPiki-ai\\LF08Nr2\\LF08Nr2\\LF08Nr2\\LF08Nr2.csproj",
         "projectName": "LF08Nr2",
-        "projectPath": "C:\\Development\\Schule\\GitHub\\LF08Nr2\\LF08Nr2\\LF08Nr2\\LF08Nr2.csproj",
-        "packagesPath": "C:\\Users\\koschinski\\.nuget\\packages\\",
-        "outputPath": "C:\\Development\\Schule\\GitHub\\LF08Nr2\\LF08Nr2\\LF08Nr2\\obj\\",
+        "projectPath": "C:\\Users\\leon\\Source\\Repos\\wikiPiki-ai\\LF08Nr2\\LF08Nr2\\LF08Nr2\\LF08Nr2.csproj",
+        "packagesPath": "C:\\Users\\leon\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\leon\\Source\\Repos\\wikiPiki-ai\\LF08Nr2\\LF08Nr2\\LF08Nr2\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
-          "C:\\Program Files\\DevExpress 22.2\\Components\\Offline Packages",
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\koschinski\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\DevExpress 22.2.config",
+          "C:\\Users\\leon\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -28,13 +26,8 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-          "C:\\Program Files\\DevExpress 22.2\\Components\\System\\Components\\Packages": {},
           "C:\\Program Files\\dotnet\\library-packs": {},
-          "R:\\PP_EDV\\Mitarbeiter\\Dennis\\PantherBCPreview": {},
-          "U:\\Nuget Packages": {},
-          "https://api.nuget.org/v3/index.json": {},
-          "https://devops.panther.local/tfs/Panther/PawasNT/_packaging/PawasNT/nuget/v3/index.json": {},
-          "https://nuget.devexpress.com/SZ3eikAOzXBWeZaJk9rBtzDEJP6WCfF3ehEcbqtFolK9s3XFLc/api": {}
+          "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
           "net8.0-windows7.0": {
@@ -56,6 +49,12 @@
       "frameworks": {
         "net8.0-windows7.0": {
           "targetAlias": "net8.0-windows",
+          "dependencies": {
+            "PdfPig": {
+              "target": "Package",
+              "version": "[0.1.8, )"
+            }
+          },
           "imports": [
             "net461",
             "net462",
@@ -75,7 +74,7 @@
               "privateAssets": "none"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.300/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.302/PortableRuntimeIdentifierGraph.json"
         }
       }
     }

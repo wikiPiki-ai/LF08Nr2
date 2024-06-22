@@ -1,8 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "roa7HWGzwf4=",
+  "dgSpecHash": "IcgskzmrZ+w=",
   "success": true,
-  "projectFilePath": "C:\\Development\\Schule\\GitHub\\LF08Nr2\\LF08Nr2\\LF08Nr2\\LF08Nr2.csproj",
-  "expectedPackageFiles": [],
+  "projectFilePath": "C:\\Users\\leon\\Source\\Repos\\wikiPiki-ai\\LF08Nr2\\LF08Nr2\\LF08Nr2\\LF08Nr2.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\leon\\.nuget\\packages\\pdfpig\\0.1.8\\pdfpig.0.1.8.nupkg.sha512"
+  ],
   "logs": []
 }

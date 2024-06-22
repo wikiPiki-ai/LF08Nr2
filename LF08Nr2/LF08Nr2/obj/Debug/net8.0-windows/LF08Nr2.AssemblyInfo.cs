@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("LF08Nr2")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+f0398255a975de576db83f22b1c4820441818ba5")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+bf4f1545cb4b4092fdf5d2c0313d8425bf167268")]
 [assembly: System.Reflection.AssemblyProductAttribute("LF08Nr2")]
 [assembly: System.Reflection.AssemblyTitleAttribute("LF08Nr2")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
