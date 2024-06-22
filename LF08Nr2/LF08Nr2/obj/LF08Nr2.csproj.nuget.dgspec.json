@@ -53,6 +53,10 @@
             "PdfPig": {
               "target": "Package",
               "version": "[0.1.8, )"
+            },
+            "System.Data.SQLite": {
+              "target": "Package",
+              "version": "[1.0.118, )"
             }
           },
           "imports": [
