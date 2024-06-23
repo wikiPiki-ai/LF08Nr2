@@ -29,7 +29,7 @@ namespace LF08Nr2.ViewModel
             {
                 privateFiles = value;
                 OnPropertyChanged();
-                
+
             }
         }
 
@@ -39,7 +39,7 @@ namespace LF08Nr2.ViewModel
         {
             //counter++;
             Files = coolFiles;
-            
+
         }
 
         public void AddDataFromExplorer(List<FileModel> Files)
@@ -59,16 +59,17 @@ namespace LF08Nr2.ViewModel
 
 
             // Get the selected file name and display in a TextBox 
-           if (result == true)
-           {
-                foreach (string filename in dlg.FileNames) {
-                    Files.Add(new FileModel() { FileName = filename});
+            if (result == true)
+            {
+                foreach (string filename in dlg.FileNames)
+                {
+                    Files.Add(new FileModel() { FileName = filename });
                 }
                 // Open document 
                 //string filename = dlg.FileName;
                 //textBox1.Text = filename;
             }
-           
+
             //if (dlg.ShowDialog() == DialogResult.OK)
             try
             {
@@ -82,15 +83,17 @@ namespace LF08Nr2.ViewModel
                 $"Details:\n\n{ex.StackTrace}");
             }
         }
-        public void getPdfInfo(List<FileModel> Files) {
-            foreach (FileModel file in Files) {
-                using (var pdf = PdfDocument.Open("@"+file.FileName))
+        public void getPdfInfo(List<FileModel> Files)
+        {
+            foreach (FileModel file in Files)
+            {
+                using (var pdf = PdfDocument.Open("@" + file.FileName))
                 {
                     foreach (var page in pdf.GetPages())
                     {
                         // Either extract based on order in the underlying document with newlines and spaces.
                         var text = ContentOrderTextExtractor.GetText(page);
-    
+
                         // Or based on grouping letters into words.
                         var otherText = string.Join(" ", page.GetWords());
 
@@ -98,9 +101,10 @@ namespace LF08Nr2.ViewModel
                         var rawText = page.Text;
 
                         Console.WriteLine(text);
+                    }
                 }
+
             }
-
+        }
     }
-
 }
