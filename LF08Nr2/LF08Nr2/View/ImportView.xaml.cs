@@ -58,6 +58,7 @@ namespace LF08Nr2.View
             //hier der aufruf zum code behind, wo logik verfasst wird.
             importviewModel.AddDataFromExplorer(Files);
             importviewModel.BindingExampel(Files);
+            importviewModel.getPdfInfo(Files);
         }
     }
 }

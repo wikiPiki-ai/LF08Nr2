@@ -14,6 +14,7 @@ using LF08Nr2.ViewModel.Base;
 using Microsoft.Win32;
 using UglyToad.PdfPig.DocumentLayoutAnalysis.TextExtractor;
 using UglyToad.PdfPig;
+using System.Diagnostics;
 
 namespace LF08Nr2.ViewModel
 {
@@ -87,7 +88,7 @@ namespace LF08Nr2.ViewModel
         {
             foreach (FileModel file in Files)
             {
-                using (var pdf = PdfDocument.Open("@" + file.FileName))
+                using (var pdf = PdfDocument.Open(@file.FileName))
                 {
                     foreach (var page in pdf.GetPages())
                     {
@@ -100,7 +101,9 @@ namespace LF08Nr2.ViewModel
                         // Or the raw text of the page's content stream.
                         var rawText = page.Text;
 
-                        Console.WriteLine(text);
+                        Trace.WriteLine(text);
+                        Trace.WriteLine(otherText);
+                        Trace.WriteLine(rawText);
                     }
                 }
 
