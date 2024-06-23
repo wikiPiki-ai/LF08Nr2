@@ -9,11 +9,12 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Documents;
 using System.Windows.Input;
+using System.Xml.Linq;
 
 namespace LF08Nr2.Model
 {
-        //https://stackoverflow.com/questions/31266217/how-to-create-sqlite-database-in-wpf
-        public class DatabaseModel
+    //https://stackoverflow.com/questions/31266217/how-to-create-sqlite-database-in-wpf
+    public class DatabaseModel
     {
         SQLiteConnection dbConnection;
         SQLiteCommand command;
@@ -97,6 +98,7 @@ namespace LF08Nr2.Model
 
         public void fillTable()
         {
+
             //TODO
             if (!checkIfTableContainsData("MY_TABLE"))
             {
@@ -104,5 +106,20 @@ namespace LF08Nr2.Model
                 executeQuery(sqlCommand);
             }
         }
-    }
+
+        public void addData(String tableName, String data, string data2)
+        {
+            try
+            {
+                dbFilePath = dbPath + "\\CourseRegistration.db";
+                createDbConnection();
+                sqlCommand = "insert into " + tableName + " (course,topic) " + "values('" + data + "'" + ",'" + data2 + "');";
+                executeQuery(sqlCommand);
+            }
+            catch (Exception ex)
+            {
+
+            }
+        }
+    } 
 }

@@ -78,7 +78,8 @@ namespace LF08Nr2.ViewModel
                 var sr = new StreamReader(dlg.FileName);
                 //SetText(sr.ReadToEnd());
             }
-            catch (SecurityException ex)
+            catch (Exception ex)
+            //SecurityException
             {
                 MessageBox.Show($"Security error.\n\nError message: {ex.Message}\n\n" +
                 $"Details:\n\n{ex.StackTrace}");
@@ -86,6 +87,7 @@ namespace LF08Nr2.ViewModel
         }
         public void getPdfInfo(List<FileModel> Files)
         {
+            pdfModel pdfModel = new pdfModel();
             foreach (FileModel file in Files)
             {
                 using (var pdf = PdfDocument.Open(@file.FileName))
@@ -94,17 +96,26 @@ namespace LF08Nr2.ViewModel
                     {
                         // Either extract based on order in the underlying document with newlines and spaces.
                         var text = ContentOrderTextExtractor.GetText(page);
+                        string[] tesdf = text.Split(Environment.NewLine);
+
+                        pdfModel.readInCourses(tesdf);
 
                         // Or based on grouping letters into words.
-                        var otherText = string.Join(" ", page.GetWords());
+                        //var otherText = string.Join(" ", page.GetWords());
 
                         // Or the raw text of the page's content stream.
-                        var rawText = page.Text;
+                        //var rawText = page.Text;
 
                         Trace.WriteLine(text);
-                        Trace.WriteLine(otherText);
-                        Trace.WriteLine(rawText);
+                        //Trace.WriteLine(otherText);
+                        //Trace.WriteLine(rawText);
+                        //Trace.WriteLine(tesdf);
+                        foreach (string texwt in tesdf) 
+                        {
+                            Trace.WriteLine(texwt);
+                        }
                     }
+                    pdfModel.readInPdf(pdf);
                 }
 
             }
