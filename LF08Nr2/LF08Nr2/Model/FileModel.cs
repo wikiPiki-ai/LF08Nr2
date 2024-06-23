@@ -9,5 +9,6 @@ namespace LF08Nr2.Model
     public class FileModel
     {
         public string FileName { get; set; }
+
     }
 }

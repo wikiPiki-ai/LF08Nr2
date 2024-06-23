@@ -23,7 +23,7 @@ namespace LF08Nr2.Model
 
         public void checkIfDbExist() {
             createDbFile();
-            Boolean isSucessfull = false;
+            bool isSucessfull = false;
             try
             {
                 createDbConnection();

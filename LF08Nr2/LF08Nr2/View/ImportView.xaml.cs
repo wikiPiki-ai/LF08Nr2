@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -19,14 +20,16 @@ namespace LF08Nr2.View
     /// <summary>
     /// Interaction logic for ImportView.xaml
     /// </summary>
-    public partial class ImportView : Window
+    public partial class ImportView : Window, INotifyPropertyChanged
     {
          public List<FileModel> Files = new List<FileModel>();
-         public string Filesstring;
+         //public string Filesstring;
 
-         private int counter = 1;
+         //private int counter = 1;
 
          private readonly ImportViewModel importviewModel;
+
+        public event PropertyChangedEventHandler? PropertyChanged;
 
         public ImportView()
         {
@@ -34,14 +37,14 @@ namespace LF08Nr2.View
             DataContext = importviewModel;
             InitializeComponent();
 
-            Files.Add(new FileModel() { FileName = "firstName"});
+            //Files.Add(new FileModel() { FileName = "firstName"});
 
 
-            List<ImportModel> import = new List<ImportModel>();
+            //List<ImportModel> import = new List<ImportModel>();
 
-            import.Add(new ImportModel() { Id = 1, Name = "TestName", Lastname = "testLastname2" });
+            //import.Add(new ImportModel() { Id = 1, Name = "TestName", Lastname = "testLastname2" });
 
-            DummyName.ItemsSource = import;
+            //DummyName.ItemsSource = import;
         }
 
         private void CloseWindow(object sender, RoutedEventArgs e)
@@ -52,9 +55,9 @@ namespace LF08Nr2.View
         private void AddDater(object sender, RoutedEventArgs e)
         {
 
-            importviewModel.BindingExampel();
             //hier der aufruf zum code behind, wo logik verfasst wird.
-            importviewModel.AddDataFromExplorer();
+            importviewModel.AddDataFromExplorer(Files);
+            importviewModel.BindingExampel(Files);
         }
     }
 }
