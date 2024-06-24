@@ -170,13 +170,13 @@ namespace LF08Nr2.Model
 
         private void addDataStudentsCoursesTimesSQL(List<int> ids)
         {
-            for (int i = 0; i < ids.Count/3; i++) 
+            for (int i = 0; i < ids.Count / 3; i++)
             {
                 try
                 {
                     dbFilePath = dbPath + "\\CourseRegistration.db";
                     createDbConnection();
-                    sqlCommand = "insert into StudentsCoursesTimes" + " (studentID,timeID,courseID) " + "values('" + ids[0 + (i*3)] + "','" + ids[1 + (i * 3)] + "'" + ",'" + ids[2 + (i * 3)] + "');";
+                    sqlCommand = "insert into StudentsCoursesTimes" + " (studentID,timeID,courseID) " + "values('" + ids[0 + (i * 3)] + "','" + ids[1 + (i * 3)] + "'" + ",'" + ids[2 + (i * 3)] + "');";
                     executeQuery(sqlCommand);
                 }
                 catch (Exception ex)
@@ -208,8 +208,8 @@ namespace LF08Nr2.Model
             if (model.isInM1Monday)
             {
                 ids.Add(addDataStudentCoursesSQL(model));
-                ids.Add(addDataTimesCoursesSQL("Mo.","08:00","11:00"));
-                ids.Add(addDataCoursesCoursesSQL("M-1","Mathe","A.1.15"));
+                ids.Add(addDataTimesCoursesSQL("Mo.", "08:00", "11:00"));
+                ids.Add(addDataCoursesCoursesSQL("M-1", "Mathe", "A.1.15"));
             }
             if (model.isInM1Tuesday)
             {
@@ -252,7 +252,7 @@ namespace LF08Nr2.Model
                 command.Parameters.AddWithValue("$lastName", model.Lastname);
                 command.Parameters.AddWithValue("$className", model.schoolClass);
 
-                using (var reader = command.ExecuteReader()) 
+                using (var reader = command.ExecuteReader())
                 {
                     reader.Read();
                     var id = reader.GetInt32(0);
@@ -385,7 +385,7 @@ namespace LF08Nr2.Model
                 return false;
             }
         }
-        private void isDataAlreadyInDbPersonSQL(String firstName, String lastName, String className) 
+        private void isDataAlreadyInDbPersonSQL(String firstName, String lastName, String className)
         {
             dbFilePath = dbPath + "\\CourseRegistration.db";
             createDbConnection();
@@ -438,116 +438,12 @@ namespace LF08Nr2.Model
         }
         public List<String> databaseToString()
         {
-            //List<String> dataStudentsCoursesTimes = new List<String>();
-            dbFilePath = dbPath + "\\CourseRegistration.db";
-            createDbConnection();
-            command.CommandText =
-            @"
-            SELECT *
-            FROM StudentsCoursesTimes
-            ";
-            
-            using (var reader = command.ExecuteReader())
-            {
-                //reader.Read();
-                //dataStudentsCoursesTimes.Add("id courseID studentID timeID");
-                //int counter = 0;
-                
-                //foreach (var row in reader) 
-                //{
-                //    dataStudentsCoursesTimes.Add();
-                //}
-                List<int> dataStudentsCoursesTimes = new List<int>();
-                while (reader.Read())
-                {
-                    dataStudentsCoursesTimes.Add(reader.GetInt32(0));
-                    dataStudentsCoursesTimes.Add(reader.GetInt32(1));
-                    dataStudentsCoursesTimes.Add(reader.GetInt32(2));
-                    dataStudentsCoursesTimes.Add(reader.GetInt32(3));
-                    //dataStudentsCoursesTimes.Add((reader.Get(0)));
-                    //counter++;
-                    //Trace.WriteLine($"Hello, {name}!");
-                }
-           
-            }
-
-           command.CommandText =
-            """
-            SELECT *
-            FROM Courses
-            """;
-
-            using (var reader = command.ExecuteReader())
-            {
-                reader.Read();
-                dataStudentsCoursesTimes.Add("id course topic room");
-                int counter = 0;
-                /*
-                foreach (var row in reader) 
-                {
-                    dataStudentsCoursesTimes.Add(row.ToString());
-                }
-                */
-                while (reader.Read())
-                {
-
-                    dataStudentsCoursesTimes.Add(Convert.ToString(reader[counter]));
-                    counter++;
-                    //Trace.WriteLine($"Hello, {name}!");
-                }
-            }
-           command.CommandText =
-           @"
-            SELECT *
-            FROM Students
-            ";
-
-            using (var reader = command.ExecuteReader())
-            {
-                reader.Read();
-                dataStudentsCoursesTimes.Add("id firstName lastName className");
-                int counter = 0;
-                /*
-                foreach (var row in reader) 
-                {
-                    dataStudentsCoursesTimes.Add(row.ToString());
-                }
-                */
-                while (reader.Read())
-                {
-
-                    dataStudentsCoursesTimes.Add(Convert.ToString(reader[counter]));
-                    counter++;
-                    //Trace.WriteLine($"Hello, {name}!");
-                }
-            }
-           command.CommandText =
-          @"
-            SELECT *
-            FROM Times
-            ";
-
-            using (var reader = command.ExecuteReader())
-            {
-                reader.Read();
-                dataStudentsCoursesTimes.Add("id dayName startName endName");
-                int counter = 0;
-                /*
-                foreach (var row in reader) 
-                {
-                    dataStudentsCoursesTimes.Add(row.ToString());
-                }
-                */
-                while (reader.Read())
-                {
-                    foreach(var row in reader)
-                        dataStudentsCoursesTimes.Add(Convert.ToString(reader[counter]));
-                        counter++;
-                    //[counter]
-                    //Trace.WriteLine($"Hello, {name}!");
-                }
-            }
-            return dataStudentsCoursesTimes;
+            List<String> result = new List<String>();
+            result.AddRange(databaseToStringCourses());
+            result.AddRange(databaseToStringStudent());
+            result.AddRange(databaseToStringStudentsCoursesTimes());
+            result.AddRange(databaseToStringTimes());
+            return result;
         }
 
         private List<String> databaseToStringCourses()
@@ -558,26 +454,126 @@ namespace LF08Nr2.Model
                                   SELECT *
                                   FROM Courses
                                   """;
+            List<int> dataCoursesIds = new List<int>();
+            List<String> dataCourses = new List<String>();
 
             using (var reader = command.ExecuteReader())
             {
-                reader.Read();
-                dataStudentsCoursesTimes.Add("id course topic room");
-                int counter = 0;
-                /*
-                foreach (var row in reader)
-                {
-                    dataStudentsCoursesTimes.Add(row.ToString());
-                }
-                */
                 while (reader.Read())
                 {
-
-                    dataStudentsCoursesTimes.Add(Convert.ToString(reader[counter]));
-                    counter++;
-                    //Trace.WriteLine($"Hello, {name}!");
+                    dataCoursesIds.Add(reader.GetInt32(0));
+                    dataCourses.Add(reader.GetString(1));
+                    dataCourses.Add(reader.GetString(2));
+                    dataCourses.Add(reader.GetString(3));
                 }
             }
+
+            foreach (var id in dataCoursesIds) 
+            {
+                dataCourses.Add(Convert.ToString(id));
+            }
+
+            return dataCourses;
+        }
+
+        private List<String> databaseToStringStudent()
+        {
+            dbFilePath = dbPath + "\\CourseRegistration.db";
+            createDbConnection();
+            command.CommandText = """
+                                  SELECT *
+                                  FROM Students
+                                  """;
+            List<int> dataStudentsIds = new List<int>();
+            List<String> dataStudents = new List<String>();
+
+            using (var reader = command.ExecuteReader())
+            {
+                while (reader.Read())
+                {
+                    dataStudentsIds.Add(reader.GetInt32(0));
+                    dataStudents.Add(reader.GetString(1));
+                    dataStudents.Add(reader.GetString(2));
+                    dataStudents.Add(reader.GetString(3));
+                }
+            }
+            
+            foreach (var id in dataStudentsIds)
+            {
+                dataStudents.Add(Convert.ToString(id));
+            }
+
+            return dataStudents;
+        }
+
+        private List<String> databaseToStringTimes()
+        {
+            dbFilePath = dbPath + "\\CourseRegistration.db";
+            createDbConnection();
+            command.CommandText = """
+                                  SELECT *
+                                  FROM Times
+                                  """;
+            List<int> dataTimesIds = new List<int>();
+            List<DateTime> dataTimes = new List<DateTime>();
+            List<string> dataTimeString = new List<string>();
+            List<string> dataTimeStringAll = new List<string>();
+
+            using (var reader = command.ExecuteReader())
+            {
+                while (reader.Read())
+                {
+                    dataTimesIds.Add(reader.GetInt32(0));
+                    dataTimeString.Add(reader.GetString(1));
+                    dataTimes.Add(reader.GetDateTime(2));
+                    dataTimes.Add(reader.GetDateTime(3));
+                }
+            }
+
+            foreach (var text in dataTimeString)
+            {
+                dataTimeStringAll.Add(Convert.ToString(text));
+            }
+
+            foreach (var time in dataTimes)
+            {
+                dataTimeStringAll.Add(Convert.ToString(time));
+            }
+
+            foreach (var id in dataTimesIds)
+            {
+                dataTimeStringAll.Add(Convert.ToString(id));
+            }
+
+            return dataTimeStringAll;
+        }
+        private List<String> databaseToStringStudentsCoursesTimes() {
+        dbFilePath = dbPath + "\\CourseRegistration.db";
+            createDbConnection();
+        command.CommandText =
+            @"
+            SELECT *
+            FROM StudentsCoursesTimes
+            ";
+            List<int> dataStudentsCoursesTimes = new List<int>();
+            List<String> dataStudentsCoursesTimesString = new List<String>();
+            using (var reader = command.ExecuteReader())
+            {
+                while (reader.Read())
+                {
+                    dataStudentsCoursesTimes.Add(reader.GetInt32(1));
+                    dataStudentsCoursesTimes.Add(reader.GetInt32(2));
+                    dataStudentsCoursesTimes.Add(reader.GetInt32(3));
+                    dataStudentsCoursesTimes.Add(reader.GetInt32(0));
+                }
+            }
+
+            foreach (var data in dataStudentsCoursesTimes) 
+            {
+                dataStudentsCoursesTimesString.Add(Convert.ToString(data));
+            }
+
+            return dataStudentsCoursesTimesString;
         }
     }
     
