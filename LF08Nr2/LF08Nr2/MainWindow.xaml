@@ -14,12 +14,12 @@
         <Grid.RowDefinitions>
             <RowDefinition />
             <RowDefinition Height="10px" />
-            <RowDefinition />
+            <RowDefinition  />
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition />
             <ColumnDefinition Width="10px" />
-            <ColumnDefinition />
+            <ColumnDefinition Width="Auto"/>
         </Grid.ColumnDefinitions>
 
         <Button

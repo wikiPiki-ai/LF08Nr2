@@ -16,39 +16,43 @@
     mc:Ignorable="d">
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition />
+           <ColumnDefinition />
             <ColumnDefinition />
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
             <RowDefinition />
             <RowDefinition Height="Auto" />
-            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
         </Grid.RowDefinitions>
 
         <Button
-            Grid.Row="0"
+            Grid.Row="1"
             Grid.Column="0"
-            Width="100"
-            Height="40px"
+            Grid.RowSpan="3"
+
+            Width="200"
+            Height="80px"
             Margin="20"
-            HorizontalAlignment="Left"
-            VerticalAlignment="Top"
+            HorizontalAlignment="Right"
+            VerticalAlignment="Center"
             Click="AddDater"
+            FontSize="20"
+            FontWeight="Bold"
             Content="Datein auswählen" />
 
         <Button
-            Grid.Row="0"
-            Grid.Column="1"
+            Grid.Row="3"
+            Grid.Column="2"
             Width="100"
             Height="40px"
             Margin="20"
             HorizontalAlignment="Right"
-            VerticalAlignment="Top"
+            VerticalAlignment="Bottom"
             Click="CloseWindow"
             Content="Schließen" />
 
-        <DataGrid
+        <!--<DataGrid
             Grid.Row="1"
             Grid.Column="0"
             Margin="10"
@@ -63,7 +67,7 @@
             Grid.RowSpan="2"
             Grid.Column="1"
             Margin="10"
-            Background="{DynamicResource ListBackground}" />
+            Background="{DynamicResource ListBackground}" />-->
 
     </Grid>
 </Window>
