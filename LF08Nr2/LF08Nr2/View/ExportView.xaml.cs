@@ -44,6 +44,7 @@ namespace LF08Nr2.View
         private void PDFExport(object sender, RoutedEventArgs e)
         {
             ExportModel export = new ExportModel();
+            export.pdfExport();            
         }
     }
 }
