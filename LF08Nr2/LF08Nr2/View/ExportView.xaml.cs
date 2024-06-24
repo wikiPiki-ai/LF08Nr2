@@ -28,13 +28,22 @@ namespace LF08Nr2.View
             exportViewModelcs = new ExportViewModelcs();
             DataContext = exportViewModelcs;
             InitializeComponent();
-            ExportModel export = new ExportModel();
-            export.csvExport();
         }
 
         private void CloseWindow(object sender, RoutedEventArgs e)
         {
             Close();
+        }
+
+        private void CsvExport(object sender, RoutedEventArgs e)
+        {
+            ExportModel export = new ExportModel();
+            export.csvExport();
+        }
+
+        private void PDFExport(object sender, RoutedEventArgs e)
+        {
+            ExportModel export = new ExportModel();
         }
     }
 }

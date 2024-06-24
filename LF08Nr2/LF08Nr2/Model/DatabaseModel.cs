@@ -1,15 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data.SQLite;
-using System.Diagnostics;
+﻿using System.Data.SQLite;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Xml.Linq;
 
 namespace LF08Nr2.Model
 {
@@ -447,7 +438,7 @@ namespace LF08Nr2.Model
         }
         public List<String> databaseToString()
         {
-            List<String> dataStudentsCoursesTimes = new List<String>();
+            //List<String> dataStudentsCoursesTimes = new List<String>();
             dbFilePath = dbPath + "\\CourseRegistration.db";
             createDbConnection();
             command.CommandText =
@@ -455,31 +446,36 @@ namespace LF08Nr2.Model
             SELECT *
             FROM StudentsCoursesTimes
             ";
-
+            
             using (var reader = command.ExecuteReader())
             {
                 //reader.Read();
-                dataStudentsCoursesTimes.Add("id courseID studentID timeID");
-                int counter = 0;
-                /*
-                foreach (var row in reader) 
-                {
-                    dataStudentsCoursesTimes.Add(row.ToString());
-                }
-                */
+                //dataStudentsCoursesTimes.Add("id courseID studentID timeID");
+                //int counter = 0;
+                
+                //foreach (var row in reader) 
+                //{
+                //    dataStudentsCoursesTimes.Add();
+                //}
+                List<int> dataStudentsCoursesTimes = new List<int>();
                 while (reader.Read())
                 {
-
-                    dataStudentsCoursesTimes.Add(Convert.ToString(reader[counter]));
-                    counter++;
+                    dataStudentsCoursesTimes.Add(reader.GetInt32(0));
+                    dataStudentsCoursesTimes.Add(reader.GetInt32(1));
+                    dataStudentsCoursesTimes.Add(reader.GetInt32(2));
+                    dataStudentsCoursesTimes.Add(reader.GetInt32(3));
+                    //dataStudentsCoursesTimes.Add((reader.Get(0)));
+                    //counter++;
                     //Trace.WriteLine($"Hello, {name}!");
                 }
+           
             }
+
            command.CommandText =
-           @"
+            """
             SELECT *
             FROM Courses
-            ";
+            """;
 
             using (var reader = command.ExecuteReader())
             {
@@ -552,6 +548,36 @@ namespace LF08Nr2.Model
                 }
             }
             return dataStudentsCoursesTimes;
+        }
+
+        private List<String> databaseToStringCourses()
+        {
+            dbFilePath = dbPath + "\\CourseRegistration.db";
+            createDbConnection();
+            command.CommandText = """
+                                  SELECT *
+                                  FROM Courses
+                                  """;
+
+            using (var reader = command.ExecuteReader())
+            {
+                reader.Read();
+                dataStudentsCoursesTimes.Add("id course topic room");
+                int counter = 0;
+                /*
+                foreach (var row in reader)
+                {
+                    dataStudentsCoursesTimes.Add(row.ToString());
+                }
+                */
+                while (reader.Read())
+                {
+
+                    dataStudentsCoursesTimes.Add(Convert.ToString(reader[counter]));
+                    counter++;
+                    //Trace.WriteLine($"Hello, {name}!");
+                }
+            }
         }
     }
     
