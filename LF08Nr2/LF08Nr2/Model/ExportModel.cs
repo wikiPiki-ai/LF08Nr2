@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace LF08Nr2.Model
 {
@@ -17,7 +18,7 @@ namespace LF08Nr2.Model
         private void csvStuff(List<String> db) 
         {
             
-
+            /*
             for (int i = 0; i < db.Count; i++)
             {
                 //int strLength = db[i].Length;
@@ -25,11 +26,14 @@ namespace LF08Nr2.Model
                 //test1[i] = test1[i].Insert(strLength, Environment.NewLine);
 
             }
+            */
 
             using (System.IO.StreamWriter file = new System.IO.StreamWriter("DBAusgabe.csv"))
             {
                 file.WriteLine(string.Join(",", db));
             }
+
+            MessageBox.Show("Die .csv Datei wurde erfolgreich erstellt!", ".csv export",MessageBoxButton.OK);
         }
     }
 }

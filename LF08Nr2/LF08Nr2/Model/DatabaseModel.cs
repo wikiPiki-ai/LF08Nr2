@@ -140,9 +140,23 @@ namespace LF08Nr2.Model
             if (isDataAlreadyInDbPerson(model.Name, model.Lastname, model.schoolClass))
             {
                 {
-                    addDataPersonSQL(model);
-                    addDataStudentsCoursesTimes(model);
-                    MessageBox.Show(model.Name + " " + model.Lastname + " wurde Erfolgreich importiert!", "Import");
+                    if (model.Name != "" || model.Lastname != "" || model.schoolClass != "")
+                    {
+                        if (!model.isInM1Monday && !model.isInM1Tuesday && !model.isInD1Monday && !model.isInD1Thursday)                            
+                        {
+                            addDataPersonSQL(model);
+                            addDataStudentsCoursesTimes(model);
+                            MessageBox.Show(model.Name + " " + model.Lastname + " wurde Erfolgreich importiert!", "Import");
+                        } 
+                        else 
+                        {
+                            MessageBox.Show("Bitte geben Sie mindesten einen Kurs an...", "Error Import", MessageBoxButton.OK);
+                        }
+                    }
+                    else 
+                    {
+                        MessageBox.Show("Die Personenbezogene Daten fehlen! Bitte das Formular komplett ausfuellen...", "Error Import", MessageBoxButton.OK);
+                    }
                 }
             }
             else
