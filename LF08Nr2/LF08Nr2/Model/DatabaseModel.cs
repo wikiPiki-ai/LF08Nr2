@@ -439,10 +439,13 @@ namespace LF08Nr2.Model
         public List<String> databaseToString()
         {
             List<String> result = new List<String>();
+            result.Add("")
             result.AddRange(databaseToStringCourses());
+            
             result.AddRange(databaseToStringStudent());
             result.AddRange(databaseToStringStudentsCoursesTimes());
             result.AddRange(databaseToStringTimes());
+            //TODO make better
             return result;
         }
 
@@ -456,6 +459,7 @@ namespace LF08Nr2.Model
                                   """;
             List<int> dataCoursesIds = new List<int>();
             List<String> dataCourses = new List<String>();
+            List<String> dataCourseAll = new List<String>();
 
             using (var reader = command.ExecuteReader())
             {
@@ -470,10 +474,15 @@ namespace LF08Nr2.Model
 
             foreach (var id in dataCoursesIds) 
             {
-                dataCourses.Add(Convert.ToString(id));
+                dataCourseAll.Add(Convert.ToString(id));
             }
 
-            return dataCourses;
+            foreach (var text in dataCourses)
+            {
+                dataCourseAll.Add(Convert.ToString(text));
+            }
+
+            return dataCourseAll;
         }
 
         private List<String> databaseToStringStudent()
@@ -486,6 +495,8 @@ namespace LF08Nr2.Model
                                   """;
             List<int> dataStudentsIds = new List<int>();
             List<String> dataStudents = new List<String>();
+            List<String> dataStudentsAll = new List<String>();
+
 
             using (var reader = command.ExecuteReader())
             {
@@ -500,10 +511,15 @@ namespace LF08Nr2.Model
             
             foreach (var id in dataStudentsIds)
             {
-                dataStudents.Add(Convert.ToString(id));
+                dataStudentsAll.Add(Convert.ToString(id));
             }
 
-            return dataStudents;
+            foreach (var text in dataStudents)
+            {
+                dataStudentsAll.Add(Convert.ToString(text));
+            }
+
+            return dataStudentsAll;
         }
 
         private List<String> databaseToStringTimes()
@@ -530,6 +546,11 @@ namespace LF08Nr2.Model
                 }
             }
 
+            foreach (var id in dataTimesIds)
+            {
+                dataTimeStringAll.Add(Convert.ToString(id));
+            }
+
             foreach (var text in dataTimeString)
             {
                 dataTimeStringAll.Add(Convert.ToString(text));
@@ -538,11 +559,6 @@ namespace LF08Nr2.Model
             foreach (var time in dataTimes)
             {
                 dataTimeStringAll.Add(Convert.ToString(time));
-            }
-
-            foreach (var id in dataTimesIds)
-            {
-                dataTimeStringAll.Add(Convert.ToString(id));
             }
 
             return dataTimeStringAll;
@@ -561,10 +577,10 @@ namespace LF08Nr2.Model
             {
                 while (reader.Read())
                 {
+                    dataStudentsCoursesTimes.Add(reader.GetInt32(0));
                     dataStudentsCoursesTimes.Add(reader.GetInt32(1));
                     dataStudentsCoursesTimes.Add(reader.GetInt32(2));
                     dataStudentsCoursesTimes.Add(reader.GetInt32(3));
-                    dataStudentsCoursesTimes.Add(reader.GetInt32(0));
                 }
             }
 
