@@ -81,6 +81,11 @@ namespace LF08Nr2.Model
             }
 
             //var page1Fields = form.GetFieldsForPage(1);
+            ImportModel model = new ImportModel();
+            DatabaseModel databaseModel = new DatabaseModel();
+
+            int counterCboxes = 0;
+            int coolerCounterText = 0;
 
             foreach (var field in form.Fields)
             {
@@ -88,15 +93,32 @@ namespace LF08Nr2.Model
                 {
                     case AcroTextField text:
                         Trace.WriteLine($"Found text field on page 1 with text: {text.Value}.");
+                        if(coolerCounterText == 0)
+                            model.Lastname = text.Value;
+                        if(coolerCounterText == 1)
+                            model.Name = text.Value;
+                        if (coolerCounterText == 2)
+                            model.schoolClass = text.Value;
+                        coolerCounterText++;
                         break;
                     case AcroCheckboxField cboxes:
                         Trace.WriteLine($"Found checkboxes field on page 1 with {cboxes.IsChecked} checkboxes.");
+                        if (counterCboxes == 0 && cboxes.IsChecked)
+                            model.isInD1Thursday = true;
+                        if (counterCboxes == 1 && cboxes.IsChecked)
+                            model.isInM1Monday = true;
+                        if (counterCboxes == 2 && cboxes.IsChecked)
+                            model.isInM1Tuesday = true;
+                        if (counterCboxes == 3 && cboxes.IsChecked)
+                            model.isInD1Monday = true;
+                        counterCboxes++;
                         break;
                 }
 
                 //bool hasForm = pdf.TryGetForm(out AcroForm form);
                 //Trace.WriteLine(hasForm);
             }
+            databaseModel.addDataPerson(model);
         }
     }
 }

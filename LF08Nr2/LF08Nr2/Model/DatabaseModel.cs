@@ -110,7 +110,6 @@ namespace LF08Nr2.Model
 
         public void addDataCourses(String course, string topic, String room)
         {
-            //TODO check if Data alreadzy in database
             if (isDataAlreadyInDbCourse(course, topic, room))
             {
                 try
@@ -129,7 +128,6 @@ namespace LF08Nr2.Model
 
         public void addDataTimes(String dayName, string startTime, String endTime)
         {
-            //TODO check if Data alreadzy in database
             if (isDataAlreadyInDbTimes(dayName, startTime, endTime))
             {
                 try
@@ -143,6 +141,45 @@ namespace LF08Nr2.Model
                 {
 
                 }
+            }
+        }
+
+        public void addDataPerson(ImportModel model)
+        { 
+            if (isDataAlreadyInDbPerson(model.Name, model.Lastname, model.schoolClass))
+            {
+                {
+                   addDataPersonLogic(model);
+                   MessageBox.Show(model.Name + " " + model.Lastname + " wurde Erfolgreich importiert!", "Import");
+                }
+            }
+            else 
+            {
+                MessageBoxResult result = MessageBox.Show("Die Person ist bereits in der Datenbank vorhanden, wollen Sie sie trotzdem importieren?", "Import", MessageBoxButton.YesNo);
+                switch (result)
+                {
+                    case MessageBoxResult.Yes:
+                        addDataPersonLogic(model);
+                        MessageBox.Show(model.Name + " " + model.Lastname + " wurde Erfolgreich importiert!", "Import");
+                        break;
+                    case MessageBoxResult.No:
+                        break;
+                }
+            }
+        }
+
+        private void addDataPersonLogic(ImportModel model)
+        {
+            try
+            {
+                dbFilePath = dbPath + "\\CourseRegistration.db";
+                createDbConnection();
+                sqlCommand = "insert into Students" + " (firstName,lastName,className) " + "values('" + model.Name + "','" + model.Lastname + "'" + ",'" + model.schoolClass + "');";
+                executeQuery(sqlCommand);
+            }
+            catch (Exception ex)
+            {
+
             }
         }
 
@@ -204,6 +241,34 @@ namespace LF08Nr2.Model
                 command.Parameters.AddWithValue("$dayName", dayName);
                 command.Parameters.AddWithValue("$startTime", startTime);
                 command.Parameters.AddWithValue("$endTime", endTime);
+
+                var result = command.ExecuteScalar();
+
+                return result == null ? true : false;
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
+        }
+        private bool isDataAlreadyInDbPerson(String firstName, String lastName, String className) 
+        {
+            try
+            {
+                dbFilePath = dbPath + "\\CourseRegistration.db";
+                createDbConnection();
+                command.CommandText =
+                @"
+                    SELECT firstName, lastName, className
+                    FROM Students
+                    WHERE firstName = $firstName
+                    AND lastName = $lastName
+                    AND className = $className
+                ";
+
+                command.Parameters.AddWithValue("$firstName", firstName);
+                command.Parameters.AddWithValue("$lastName", lastName);
+                command.Parameters.AddWithValue("$className", className);
 
                 var result = command.ExecuteScalar();
 
