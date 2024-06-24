@@ -99,6 +99,7 @@ namespace LF08Nr2.ViewModel
                         string[] tesdf = text.Split(Environment.NewLine);
 
                         pdfModel.readInCourses(tesdf);
+                        pdfModel.readInTimes(tesdf);
 
                         // Or based on grouping letters into words.
                         //var otherText = string.Join(" ", page.GetWords());
