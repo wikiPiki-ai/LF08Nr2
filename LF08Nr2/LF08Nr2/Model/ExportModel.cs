@@ -20,15 +20,15 @@ namespace LF08Nr2.Model
 
             for (int i = 0; i < db.Count; i++)
             {
-                int strLength = db[i].Length;
-                db[i] = db[i].Replace(' ', ',');
+                //int strLength = db[i].Length;
+                //db[i] = db[i].Replace(Environment.NewLine, ',');
                 //test1[i] = test1[i].Insert(strLength, Environment.NewLine);
 
             }
 
             using (System.IO.StreamWriter file = new System.IO.StreamWriter("DBAusgabe.csv"))
             {
-                file.WriteLine(string.Join(Environment.NewLine, db));
+                file.WriteLine(string.Join(",", db));
             }
         }
     }

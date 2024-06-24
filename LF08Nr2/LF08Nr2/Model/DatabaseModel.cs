@@ -439,11 +439,25 @@ namespace LF08Nr2.Model
         public List<String> databaseToString()
         {
             List<String> result = new List<String>();
-            
+            result.Add("id");
+            result.Add("course");
+            result.Add("topic");
+            result.Add("room");
             result.AddRange(databaseToStringCourses());
-            
+            result.Add("id");
+            result.Add("firstName");
+            result.Add("lastName");
+            result.Add("className");
             result.AddRange(databaseToStringStudent());
+            result.Add("id");
+            result.Add("courseID");
+            result.Add("studentID");
+            result.Add("timeID");
             result.AddRange(databaseToStringStudentsCoursesTimes());
+            result.Add("id");
+            result.Add("dayName");
+            result.Add("startName");
+            result.Add("endTime");
             result.AddRange(databaseToStringTimes());
             //TODO make better
             return result;
