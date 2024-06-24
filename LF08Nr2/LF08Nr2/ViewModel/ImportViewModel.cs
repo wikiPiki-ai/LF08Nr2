@@ -87,6 +87,7 @@ namespace LF08Nr2.ViewModel
         }
         public void getPdfInfo(List<FileModel> Files)
         {
+            //TODO files are being imported multiple times
             pdfModel pdfModel = new pdfModel();
             foreach (FileModel file in Files)
             {
