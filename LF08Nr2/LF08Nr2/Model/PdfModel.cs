@@ -76,7 +76,7 @@ namespace LF08Nr2.Model
         {
             if (!pdf.TryGetForm(out var form))
             {
-                Trace.WriteLine($"No form found in file.");
+                //Trace.WriteLine($"No form found in file.");
                 return;
             }
 
@@ -104,11 +104,11 @@ namespace LF08Nr2.Model
                     case AcroCheckboxField cboxes:
                         Trace.WriteLine($"Found checkboxes field on page 1 with {cboxes.IsChecked} checkboxes.");
                         if (counterCboxes == 0 && cboxes.IsChecked)
-                            model.isInD1Thursday = true;
-                        if (counterCboxes == 1 && cboxes.IsChecked)
                             model.isInM1Monday = true;
-                        if (counterCboxes == 2 && cboxes.IsChecked)
+                        if (counterCboxes == 1 && cboxes.IsChecked)
                             model.isInM1Tuesday = true;
+                        if (counterCboxes == 2 && cboxes.IsChecked)
+                            model.isInD1Thursday = true;
                         if (counterCboxes == 3 && cboxes.IsChecked)
                             model.isInD1Monday = true;
                         counterCboxes++;

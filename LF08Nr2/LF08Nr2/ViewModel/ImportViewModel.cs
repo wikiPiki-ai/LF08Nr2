@@ -81,8 +81,8 @@ namespace LF08Nr2.ViewModel
             catch (Exception ex)
             //SecurityException
             {
-                MessageBox.Show($"Security error.\n\nError message: {ex.Message}\n\n" +
-                $"Details:\n\n{ex.StackTrace}");
+                //MessageBox.Show($"Security error.\n\nError message: {ex.Message}\n\n" +
+                //$"Details:\n\n{ex.StackTrace}");
             }
         }
         public void getPdfInfo(List<FileModel> Files)

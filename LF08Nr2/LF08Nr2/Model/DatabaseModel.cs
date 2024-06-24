@@ -145,30 +145,57 @@ namespace LF08Nr2.Model
         }
 
         public void addDataPerson(ImportModel model)
-        { 
+        {
             if (isDataAlreadyInDbPerson(model.Name, model.Lastname, model.schoolClass))
             {
                 {
-                   addDataPersonLogic(model);
-                   MessageBox.Show(model.Name + " " + model.Lastname + " wurde Erfolgreich importiert!", "Import");
+                    addDataPersonSQL(model);
+                    addDataStudentsCoursesTimes(model);
+                    MessageBox.Show(model.Name + " " + model.Lastname + " wurde Erfolgreich importiert!", "Import");
                 }
             }
-            else 
+            else
             {
-                MessageBoxResult result = MessageBox.Show("Die Person ist bereits in der Datenbank vorhanden, wollen Sie sie trotzdem importieren?", "Import", MessageBoxButton.YesNo);
+                MessageBoxResult result = MessageBox.Show("Diese Person ist bereits in der Datenbank vorhanden...", "Import", MessageBoxButton.OK);
+                /*
                 switch (result)
                 {
+                    //TODO User an besten keine Wahl geben 
                     case MessageBoxResult.Yes:
-                        addDataPersonLogic(model);
+                        addDataPersonSQL(model);
                         MessageBox.Show(model.Name + " " + model.Lastname + " wurde Erfolgreich importiert!", "Import");
                         break;
                     case MessageBoxResult.No:
                         break;
                 }
+                */
             }
         }
 
-        private void addDataPersonLogic(ImportModel model)
+        private void addDataStudentsCoursesTimes(ImportModel model)
+        {
+            addDataStudentsCoursesTimesSQL(addDataPersonCourses(model));
+        }
+
+        private void addDataStudentsCoursesTimesSQL(List<int> ids)
+        {
+            for (int i = 0; i < ids.Count/3; i++) 
+            {
+                try
+                {
+                    dbFilePath = dbPath + "\\CourseRegistration.db";
+                    createDbConnection();
+                    sqlCommand = "insert into StudentsCoursesTimes" + " (studentID,timeID,courseID) " + "values('" + ids[0 + (i*3)] + "','" + ids[1 + (i * 3)] + "'" + ",'" + ids[2 + (i * 3)] + "');";
+                    executeQuery(sqlCommand);
+                }
+                catch (Exception ex)
+                {
+
+                }
+            }
+        }
+
+        private void addDataPersonSQL(ImportModel model)
         {
             try
             {
@@ -183,7 +210,39 @@ namespace LF08Nr2.Model
             }
         }
 
-        private bool isDataAlreadyInDbCourse(String course, String topic, String room) 
+        private List<int> addDataPersonCourses(ImportModel model)
+        {
+            List<int> ids = new List<int>();
+
+            if (model.isInM1Monday)
+            {
+                ids.Add(addDataStudentCoursesSQL(model));
+                ids.Add(addDataTimesCoursesSQL("Mo.","08:00","11:00"));
+                ids.Add(addDataCoursesCoursesSQL("M-1","Mathe","A.1.15"));
+            }
+            if (model.isInM1Tuesday)
+            {
+                ids.Add(addDataStudentCoursesSQL(model));
+                ids.Add(addDataTimesCoursesSQL("Di.", "12:00", "15:00"));
+                ids.Add(addDataCoursesCoursesSQL("M-1", "Mathe", "A.1.15"));
+            }
+            if (model.isInD1Monday)
+            {
+                ids.Add(addDataStudentCoursesSQL(model));
+                ids.Add(addDataTimesCoursesSQL("Mo.", "12:00", "15:00"));
+                ids.Add(addDataCoursesCoursesSQL("D-1", "Deutsch", "A1.15"));
+            }
+            if (model.isInD1Thursday)
+            {
+                ids.Add(addDataStudentCoursesSQL(model));
+                ids.Add(addDataTimesCoursesSQL("Do.", "08:00", "11:00"));
+                ids.Add(addDataCoursesCoursesSQL("D-1", "Deutsch", "A1.15"));
+            }
+
+            return ids;
+        }
+
+        private int addDataStudentCoursesSQL(ImportModel model)
         {
             try
             {
@@ -191,7 +250,70 @@ namespace LF08Nr2.Model
                 createDbConnection();
                 command.CommandText =
                 @"
-                    SELECT course, topic, room
+                    SELECT id
+                    FROM Students
+                    WHERE firstName = $firstName
+                    AND lastName = $lastName
+                    AND className = $className
+                ";
+
+                command.Parameters.AddWithValue("$firstName", model.Name);
+                command.Parameters.AddWithValue("$lastName", model.Lastname);
+                command.Parameters.AddWithValue("$className", model.schoolClass);
+
+                using (var reader = command.ExecuteReader()) 
+                {
+                    reader.Read();
+                    var id = reader.GetInt32(0);
+                    return id;
+                }
+            }
+            catch (Exception ex)
+            {
+                return -1; //TODO Ordentlich machen
+            }
+        }
+
+        private int addDataTimesCoursesSQL(String dayName, String startTime, String endTime)
+        {
+            try
+            {
+                dbFilePath = dbPath + "\\CourseRegistration.db";
+                createDbConnection();
+                command.CommandText =
+                 @"
+                    SELECT id
+                    FROM times
+                    WHERE dayName = $dayName
+                    AND startTime = $startTime
+                    AND endTime = $endTime
+                ";
+
+                command.Parameters.AddWithValue("$dayName", dayName);
+                command.Parameters.AddWithValue("$startTime", startTime);
+                command.Parameters.AddWithValue("$endTime", endTime);
+
+                using (var reader = command.ExecuteReader())
+                {
+                    reader.Read();
+                    var id = reader.GetInt32(0);
+                    return id;
+                    //Trace.WriteLine($"Hello, {name}!");
+                }
+            }
+            catch (Exception ex)
+            {
+                return -1; //TODO Ordentlich machen
+            }
+        }
+
+        private int addDataCoursesCoursesSQL(String course, String topic, String room)
+        {
+            try
+            {
+                command.CommandText =
+                @"
+                    SELECT id
                     FROM courses
                     WHERE course = $course
                     AND topic = $topic
@@ -202,10 +324,29 @@ namespace LF08Nr2.Model
                 command.Parameters.AddWithValue("$topic", topic);
                 command.Parameters.AddWithValue("$room", room);
 
+                using (var reader = command.ExecuteReader())
+                {
+                    reader.Read();
+                    var id = reader.GetInt32(0);
+                    return id;
+                }
+            }
+            catch (Exception ex)
+            {
+                return -1; //TODO Ordentlich machen
+            }
+        }
+
+        private bool isDataAlreadyInDbCourse(String course, String topic, String room)
+        {
+            try
+            {
+                isDataAlreadyInDbCourseSQL(course, topic, room);
+
                 var result = command.ExecuteScalar();
 
                 return result == null ? true : false;
-               
+
                 /*using (var reader = command.ExecuteReader()) 
                 {
                     while (reader.Read())
@@ -227,10 +368,55 @@ namespace LF08Nr2.Model
         {
             try
             {
-                dbFilePath = dbPath + "\\CourseRegistration.db";
-                createDbConnection();
-                command.CommandText =
-                @"
+                isDataAlreadyInDbTimesSQL(dayName, startTime, endTime);
+
+                var result = command.ExecuteScalar();
+
+                return result == null ? true : false;
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
+        }
+        private bool isDataAlreadyInDbPerson(String firstName, String lastName, String className)
+        {
+            try
+            {
+                isDataAlreadyInDbPersonSQL(firstName, lastName, className);
+
+                var result = command.ExecuteScalar();
+
+                return result == null ? true : false;
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
+        }
+        private void isDataAlreadyInDbPersonSQL(String firstName, String lastName, String className) 
+        {
+            dbFilePath = dbPath + "\\CourseRegistration.db";
+            createDbConnection();
+            command.CommandText =
+            @"
+                    SELECT firstName, lastName, className
+                    FROM Students
+                    WHERE firstName = $firstName
+                    AND lastName = $lastName
+                    AND className = $className
+            ";
+
+            command.Parameters.AddWithValue("$firstName", firstName);
+            command.Parameters.AddWithValue("$lastName", lastName);
+            command.Parameters.AddWithValue("$className", className);
+        }
+        private void isDataAlreadyInDbTimesSQL(String dayName, String startTime, String endTime)
+        {
+            dbFilePath = dbPath + "\\CourseRegistration.db";
+            createDbConnection();
+            command.CommandText =
+            @"
                     SELECT dayName, startTime, endTime
                     FROM times
                     WHERE dayName = $dayName
@@ -238,46 +424,135 @@ namespace LF08Nr2.Model
                     AND endTime = $endTime
                 ";
 
-                command.Parameters.AddWithValue("$dayName", dayName);
-                command.Parameters.AddWithValue("$startTime", startTime);
-                command.Parameters.AddWithValue("$endTime", endTime);
-
-                var result = command.ExecuteScalar();
-
-                return result == null ? true : false;
-            }
-            catch (Exception ex)
-            {
-                return false;
-            }
+            command.Parameters.AddWithValue("$dayName", dayName);
+            command.Parameters.AddWithValue("$startTime", startTime);
+            command.Parameters.AddWithValue("$endTime", endTime);
         }
-        private bool isDataAlreadyInDbPerson(String firstName, String lastName, String className) 
+        private void isDataAlreadyInDbCourseSQL(String course, String topic, String room)
         {
-            try
-            {
-                dbFilePath = dbPath + "\\CourseRegistration.db";
-                createDbConnection();
-                command.CommandText =
-                @"
-                    SELECT firstName, lastName, className
-                    FROM Students
-                    WHERE firstName = $firstName
-                    AND lastName = $lastName
-                    AND className = $className
+            dbFilePath = dbPath + "\\CourseRegistration.db";
+            createDbConnection();
+            command.CommandText =
+            @"
+                    SELECT course, topic, room
+                    FROM courses
+                    WHERE course = $course
+                    AND topic = $topic
+                    AND room = $room
                 ";
 
-                command.Parameters.AddWithValue("$firstName", firstName);
-                command.Parameters.AddWithValue("$lastName", lastName);
-                command.Parameters.AddWithValue("$className", className);
+            command.Parameters.AddWithValue("$course", course);
+            command.Parameters.AddWithValue("$topic", topic);
+            command.Parameters.AddWithValue("$room", room);
+        }
+        public List<String> databaseToString()
+        {
+            List<String> dataStudentsCoursesTimes = new List<String>();
+            dbFilePath = dbPath + "\\CourseRegistration.db";
+            createDbConnection();
+            command.CommandText =
+            @"
+            SELECT *
+            FROM StudentsCoursesTimes
+            ";
 
-                var result = command.ExecuteScalar();
-
-                return result == null ? true : false;
-            }
-            catch (Exception ex)
+            using (var reader = command.ExecuteReader())
             {
-                return false;
+                //reader.Read();
+                dataStudentsCoursesTimes.Add("id courseID studentID timeID");
+                int counter = 0;
+                /*
+                foreach (var row in reader) 
+                {
+                    dataStudentsCoursesTimes.Add(row.ToString());
+                }
+                */
+                while (reader.Read())
+                {
+
+                    dataStudentsCoursesTimes.Add(Convert.ToString(reader[counter]));
+                    counter++;
+                    //Trace.WriteLine($"Hello, {name}!");
+                }
             }
+           command.CommandText =
+           @"
+            SELECT *
+            FROM Courses
+            ";
+
+            using (var reader = command.ExecuteReader())
+            {
+                reader.Read();
+                dataStudentsCoursesTimes.Add("id course topic room");
+                int counter = 0;
+                /*
+                foreach (var row in reader) 
+                {
+                    dataStudentsCoursesTimes.Add(row.ToString());
+                }
+                */
+                while (reader.Read())
+                {
+
+                    dataStudentsCoursesTimes.Add(Convert.ToString(reader[counter]));
+                    counter++;
+                    //Trace.WriteLine($"Hello, {name}!");
+                }
+            }
+           command.CommandText =
+           @"
+            SELECT *
+            FROM Students
+            ";
+
+            using (var reader = command.ExecuteReader())
+            {
+                reader.Read();
+                dataStudentsCoursesTimes.Add("id firstName lastName className");
+                int counter = 0;
+                /*
+                foreach (var row in reader) 
+                {
+                    dataStudentsCoursesTimes.Add(row.ToString());
+                }
+                */
+                while (reader.Read())
+                {
+
+                    dataStudentsCoursesTimes.Add(Convert.ToString(reader[counter]));
+                    counter++;
+                    //Trace.WriteLine($"Hello, {name}!");
+                }
+            }
+           command.CommandText =
+          @"
+            SELECT *
+            FROM Times
+            ";
+
+            using (var reader = command.ExecuteReader())
+            {
+                reader.Read();
+                dataStudentsCoursesTimes.Add("id dayName startName endName");
+                int counter = 0;
+                /*
+                foreach (var row in reader) 
+                {
+                    dataStudentsCoursesTimes.Add(row.ToString());
+                }
+                */
+                while (reader.Read())
+                {
+                    foreach(var row in reader)
+                        dataStudentsCoursesTimes.Add(Convert.ToString(reader[counter]));
+                        counter++;
+                    //[counter]
+                    //Trace.WriteLine($"Hello, {name}!");
+                }
+            }
+            return dataStudentsCoursesTimes;
         }
     }
+    
 }
