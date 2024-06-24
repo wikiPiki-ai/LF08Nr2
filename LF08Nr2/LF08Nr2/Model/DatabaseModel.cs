@@ -439,7 +439,7 @@ namespace LF08Nr2.Model
         public List<String> databaseToString()
         {
             List<String> result = new List<String>();
-            result.Add("")
+            
             result.AddRange(databaseToStringCourses());
             
             result.AddRange(databaseToStringStudent());
