@@ -40,7 +40,7 @@ namespace LF08Nr2.Model
             }
             */
 
-            using (System.IO.StreamWriter file = new System.IO.StreamWriter("DBAusgabe.csv"))
+            using (System.IO.StreamWriter file = new System.IO.StreamWriter("Teilnehmerliste.csv"))
             {
                 file.WriteLine(string.Join(",", db));
             }
@@ -70,7 +70,7 @@ namespace LF08Nr2.Model
                 //page.AddText(csvStuff(db),12, closeToTop, helvetica);
             }
 
-            File.WriteAllBytes("Export.pdf", builder.Build());
+            File.WriteAllBytes("Teilnehmerliste.pdf", builder.Build());
             MessageBox.Show("Die .pdf Datei wurde erfolgreich erstellt!", ".pdf export", MessageBoxButton.OK);
         }
     }
