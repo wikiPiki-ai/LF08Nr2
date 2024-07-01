@@ -1445,23 +1445,23 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\leon\\.nuget\\packages\\": {},
+    "C:\\Users\\LeBu\\.nuget\\packages\\": {},
     "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\leon\\source\\repos\\wikiPiki-ai\\LF08Nr2\\LF08Nr2\\LF08Nr2\\LF08Nr2.csproj",
+      "projectUniqueName": "C:\\Users\\LeBu\\Source\\Repos\\wikiPiki-ai\\LF08Nr2\\LF08Nr2\\LF08Nr2\\LF08Nr2.csproj",
       "projectName": "LF08Nr2",
-      "projectPath": "C:\\Users\\leon\\source\\repos\\wikiPiki-ai\\LF08Nr2\\LF08Nr2\\LF08Nr2\\LF08Nr2.csproj",
-      "packagesPath": "C:\\Users\\leon\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\leon\\source\\repos\\wikiPiki-ai\\LF08Nr2\\LF08Nr2\\LF08Nr2\\obj\\",
+      "projectPath": "C:\\Users\\LeBu\\Source\\Repos\\wikiPiki-ai\\LF08Nr2\\LF08Nr2\\LF08Nr2\\LF08Nr2.csproj",
+      "packagesPath": "C:\\Users\\LeBu\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\LeBu\\Source\\Repos\\wikiPiki-ai\\LF08Nr2\\LF08Nr2\\LF08Nr2\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
       ],
       "configFilePaths": [
-        "C:\\Users\\leon\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\LeBu\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],

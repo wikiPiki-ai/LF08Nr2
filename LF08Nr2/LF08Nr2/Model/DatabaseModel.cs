@@ -142,16 +142,18 @@ namespace LF08Nr2.Model
                 {
                     if (model.Name != "" || model.Lastname != "" || model.schoolClass != "")
                     {
-                        if (!model.isInM1Monday && !model.isInM1Tuesday && !model.isInD1Monday && !model.isInD1Thursday)                            
-                        {
+                        // TODO - fix this part of the code because it costs us our project mark :(
+                        //if (!model.isInM1Monday && !model.isInM1Tuesday && !model.isInD1Monday && !model.isInD1Thursday)                            
+                        //{
                             addDataPersonSQL(model);
                             addDataStudentsCoursesTimes(model);
                             MessageBox.Show(model.Name + " " + model.Lastname + " wurde Erfolgreich importiert!", "Import");
-                        } 
-                        else 
-                        {
-                            MessageBox.Show("Bitte geben Sie mindesten einen Kurs an...", "Error Import", MessageBoxButton.OK);
-                        }
+                        //} 
+                        //else 
+                        //{
+                           // MessageBox.Show("Bitte geben Sie mindesten einen Kurs an...", "Error Import", MessageBoxButton.OK);
+                        //}
+                        
                     }
                     else 
                     {
