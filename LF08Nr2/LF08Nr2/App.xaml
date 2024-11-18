@@ -2,8 +2,10 @@
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:local="clr-namespace:LF08Nr2"
+             Startup="Application_Startup"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
-         
+        <SolidColorBrush x:Key="GrayBrush" Color="#212226" />
+        <SolidColorBrush x:Key="ListBackground" Color="#3a3b40" />
     </Application.Resources>
 </Application>
