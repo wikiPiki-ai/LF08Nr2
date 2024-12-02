@@ -60,5 +60,10 @@ namespace LF08Nr2.View
             importviewModel.BindingExampel(Files);
             importviewModel.getPdfInfo(Files);
         }
+
+        private void CommandBinding_Executed(object sender, ExecutedRoutedEventArgs e)
+        {
+
+        }
     }
 }

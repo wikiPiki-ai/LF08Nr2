@@ -15,6 +15,7 @@ using Microsoft.Win32;
 using UglyToad.PdfPig.DocumentLayoutAnalysis.TextExtractor;
 using UglyToad.PdfPig;
 using System.Diagnostics;
+using System.Windows.Input;
 
 namespace LF08Nr2.ViewModel
 {
@@ -33,6 +34,49 @@ namespace LF08Nr2.ViewModel
 
             }
         }
+
+        public ICommand CoolCommand { get; set; }
+
+        public ImportViewModel()
+        {
+            CoolCommand = new CoolCommand(Cool);
+        }
+
+        private void Cool(object? parameter)
+        {
+            AddDataFromExplorer(Files);
+        }
+
+        /*
+        public int MyProperty
+        {
+            get { return (int)GetValue(MyPropertyProperty); }
+            set { SetValue(MyPropertyProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for MyProperty.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty MyPropertyProperty =
+            DependencyProperty.Register("MyProperty", typeof(int), typeof(ownerclass), new PropertyMetadata(0));
+
+
+
+
+        public static int GetMyProperty(DependencyObject obj)
+        {
+            return (int)obj.GetValue(MyPropertyProperty);
+        }
+
+        public static void SetMyProperty(DependencyObject obj, int value)
+        {
+            obj.SetValue(MyPropertyProperty, value);
+        }
+
+        // Using a DependencyProperty as the backing store for MyProperty.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty MyPropertyProperty =
+            DependencyProperty.RegisterAttached("MyProperty", typeof(int), typeof(ownerclass), new PropertyMetadata(0));
+
+
+        */
 
         public int counter = 0;
 

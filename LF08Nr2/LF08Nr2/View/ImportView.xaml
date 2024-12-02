@@ -36,10 +36,12 @@
             Margin="20"
             HorizontalAlignment="Right"
             VerticalAlignment="Center"
-            Click="AddDater"
             FontSize="20"
             FontWeight="Bold"
-            Content="Datein auswählen" />
+            Content="Datein auswählen" 
+            Command="{Binding Path=CoolCommand}"/>
+        <!--Click="AddDater"
+            Command="{Binding clickCommand, RelativeSource={RelativeSource AncestorType=UserControl, Mode=FindAncestor}}"-->
 
         <Button
             Grid.Row="3"
