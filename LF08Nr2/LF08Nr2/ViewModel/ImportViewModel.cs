@@ -47,6 +47,8 @@ namespace LF08Nr2.ViewModel
             AddDataFromExplorer(Files);
         }
 
+
+
         /*
         public int MyProperty
         {

@@ -54,6 +54,32 @@
             Click="CloseWindow"
             Content="Schließen" />
 
+        <StackPanel
+            Grid.Row="1"
+            Grid.Column="3"
+            Grid.RowSpan="2"
+            Width="200"
+            Height="30px"
+            Margin="30"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center">
+
+            
+            <StackPanel.Resources>
+                <viewModels:CoolVacation x:Key="mewtooVacation"/>
+            </StackPanel.Resources>
+            
+            
+            <ComboBox 
+            Name="cooleComboBox"
+            ItemsSource="{StaticResource mewtooVacation}"
+            Text="coolShit"
+            IsEditable="True"
+            IsReadOnly="True"/>
+
+            <TextBlock Text="{Binding ElementName=cooleComboBox, Path=SelectedItem}"/>
+        </StackPanel>
+
         <!--<DataGrid
             Grid.Row="1"
             Grid.Column="0"

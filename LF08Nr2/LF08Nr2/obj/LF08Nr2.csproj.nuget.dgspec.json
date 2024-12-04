@@ -58,6 +58,14 @@
             "System.Data.SQLite": {
               "target": "Package",
               "version": "[1.0.118, )"
+            },
+            "System.Data.SqlClient": {
+              "target": "Package",
+              "version": "[4.9.0, )"
+            },
+            "System.Drawing.Common": {
+              "target": "Package",
+              "version": "[9.0.0, )"
             }
           },
           "imports": [
